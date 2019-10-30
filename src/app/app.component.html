@@ -2,46 +2,14 @@
   <mat-toolbar-row>{{title}}</mat-toolbar-row>
 </mat-toolbar>
 
-<img src="./assets/images/pelvisReset.jpg" alt="pelvis reset">
-<audio id="myAudio">
-  <source src="./assets/sound/ring.mp3" type="audio/mpeg">
-</audio>
-<br>
 
-<mat-list>
-  <mat-list-item>
-    <h3 mat-line>Instruction</h3>
-    <p mat-line>Lie down on your back with both of your hip/knees bent in the air at 90 degrees. </p>
-    <p mat-line> Place your hand on top of one knee, and the other below the other knee.</p>
-    <p mat-line> Whilst applying an opposing force on both knees, use your leg muscles to keep your knee in the same position.</p>
-    <p mat-line> Hold for 5 seconds.</p>
-    <p mat-line> Repeat on other side.</p>
-    <p mat-line > Squeeze a ball between your knees and hold for 5 seconds.</p>
-    <p mat-line > Repeat 5 times</p>
-  </mat-list-item>
-</mat-list>
 
-<mat-card>
-  <mat-card-content>
-    <h2 class="example-h2">Result</h2>
+<div class="hero-list" *ngIf="steps else loading">
+  <app-excise>
 
-    <div *ngIf = "!finish; else wellDoneBlock">
-      <mat-progress-spinner
-        class="example-margin"
-        [color]="color"
-        [mode]="mode"
-        [value]="value">
-      </mat-progress-spinner>
-    </div>
-    <ng-template #wellDoneBlock>
-      <h3>Well Done!</h3>
-    </ng-template>
+  </app-excise>
+</div>
 
-  </mat-card-content>
-</mat-card>
-
-<mat-card>
-  <mat-card-content>
-    <h2>Repeat: {{repeat}}</h2>
-  </mat-card-content>
-</mat-card>
+<ng-template #loading>
+  <div>Loading...</div>
+</ng-template>
