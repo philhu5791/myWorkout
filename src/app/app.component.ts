@@ -15,9 +15,9 @@ export class AppComponent {
   stepTime :number;
   repeat :number;
   timeCounter :number;
-  interval: var;
+  interval: number;
   finish: boolean;
-  ring: audio;
+  ring;
 
   constructor() {
     this.title = 'my-workout';
