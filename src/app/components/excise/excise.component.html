@@ -1,39 +1,44 @@
-<img src={{imageSrc}} alt="image">
-<mat-list>
-  <mat-list-item>
-    <h2>Instruction</h2>
-  </mat-list-item>
+
+  <img src={{imageSrc}} alt="image">
+  <mat-list>
+    <mat-list-item>
+      <h2>{{title}}</h2>
+    </mat-list-item>
 
     <mat-list-item *ngFor="let line of instruction">
       <p mat-line> {{line}}</p>
     </mat-list-item>
 
-</mat-list>
+  </mat-list>
 
-<mat-card>
-  <mat-card-content>
-    <h2 >Result</h2>
+  <mat-card>
+    <mat-card-content>
+      <h2 >Result</h2>
 
-    <div *ngIf = "!finish; else wellDoneBlock">
-      <mat-progress-spinner
-        class="example-margin"
-        [color]="color"
-        [mode]="mode"
-        [value]="value">
-      </mat-progress-spinner>
-    </div>
-    <ng-template #wellDoneBlock>
-      <h3>Well Done!</h3>
-    </ng-template>
+      <div *ngIf = "!finish; else wellDoneBlock">
+        <mat-progress-spinner
+          class="example-margin"
+          [color]="color"
+          [mode]="mode"
+          [value]="value">
+        </mat-progress-spinner>
+      </div>
+      <ng-template #wellDoneBlock>
+        <h3>Well Done!</h3>
+      </ng-template>
 
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
 
-<mat-card>
-  <mat-card-content>
-    <h2 *ngIf = "!finish">Repeat: {{repeat}}</h2>
-    <button mat-stroked-button color = "primary" *ngIf = "finish" (click)="onPreviousStep()">Previous</button>
-    <div class="divider"> </div>
-    <button mat-stroked-button color = "primary" *ngIf = "finish" (click)="onNextStep()">Next</button>
-  </mat-card-content>
-</mat-card>
+  <mat-card>
+    <mat-card-content>
+      <h2 *ngIf = "!finish">Repeat: {{repeat}}</h2>
+      <button mat-stroked-button color = "primary" *ngIf = "finish" (click)="onPreviousStep()">Previous</button>
+      <div class="divider"> </div>
+      <button mat-stroked-button color = "primary" *ngIf = "finish" (click)="onNextStep()">Next</button>
+    </mat-card-content>
+  </mat-card>
+
+
+
+

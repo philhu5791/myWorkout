@@ -1,15 +1,38 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>{{title}}</mat-toolbar-row>
+  <mat-toolbar-row>
+    <span>{{title}}</span>
+    <span class="spacer"></span>
+    <mat-slide-toggle
+      class="example-margin"
+      color="warn"
+      [(ngModel)]="isDemoChecked"
+      (change)="onDemoChange($event)"
+      >
+      Demo
+    </mat-slide-toggle>
+
+    <mat-slide-toggle
+      class="example-margin"
+      [(ngModel)]="isAutoChecked"
+      (change)="onAutoChange($event)"
+
+    >
+      AutoPlay
+    </mat-slide-toggle>
+  </mat-toolbar-row>
+
+
 </mat-toolbar>
 
-
-
-<div class="hero-list" *ngIf="steps else loading">
-  <app-excise>
+<div class="hero-list" *ngIf="load else loading">
+  <app-excise [demoMode] = "isDemoChecked">
 
   </app-excise>
+
 </div>
 
 <ng-template #loading>
   <div>Loading...</div>
 </ng-template>
+<!--      [(ngModel)]="isDemoChecked"-->
+<!--      [(ngModel)]="isAutoChecked"-->

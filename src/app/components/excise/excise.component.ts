@@ -7,7 +7,10 @@ import { StepSourceService } from '../../services/step-source.service';
   templateUrl: './excise.component.html',
   styleUrls: ['./excise.component.css']
 })
+
+
 export class ExciseComponent implements OnInit {
+  @Input() demoMode;
   excise: ExciseStep;
 
     color :String;
@@ -22,14 +25,15 @@ export class ExciseComponent implements OnInit {
     finish: boolean;
 
     ring;
+    title: String;
     imageSrc: String;
     instruction: String[];
 
     constructor(private service: StepSourceService) {
+      console.log("excise component is creating")
       this.color = 'primary';
       this.mode = 'determinate';
       console.log(this.excise);
-      this.loadStepDetail();
       this.ring = new Audio();
       this.ring.src = "./assets/sound/ring.mp3"
       this.ring.load();
@@ -38,12 +42,25 @@ export class ExciseComponent implements OnInit {
     ngOnInit(){
 //       console.log("value is "+ this.value)
 //       console.log("stepTime is "+ this.stepTime)
+      console.log("excise component on Init")
+      this.loadStepDetail();
       this.startCountingDown()
     }
+    ngOnChanges() {
+    console.log("demoMode is changed " + this.demoMode)
+    if(this.demoMode == true || this.demoMode == false){
+        this.stopCountingDown();
+        this.loadStepDetail();
+        this.startCountingDown()
+    }
+
+   }
+
 
     loadStepDetail(){
           this.value = 100;
           this.excise = this.service.getStep();
+          this.title = this.excise.title;
           this.stepTime = this.excise.stepTime;
           this.repeat = this.excise.repeatTime;
           this.timeCounter = this.stepTime;
@@ -78,11 +95,12 @@ export class ExciseComponent implements OnInit {
           this.ring.play();
           clearInterval(this.interval);
           this.repeat --;
-          if(this.repeat != 0){
+          if(this.repeat > 0){
             this.value = 100
             progress.reset()
             this.startCountingDown();
           }else{
+            console.log("The excise is finished");
             this.finish = true;
           }
         }
@@ -91,7 +109,15 @@ export class ExciseComponent implements OnInit {
 
 
    startCountingDown(){
+         console.log("Start to countdown for " + this.stepTime + "s");
          this.interval = setInterval(()=>{this.setProgress(this.progressControl)}, 1000);
+   }
+
+   stopCountingDown(){
+     if(this.interval){
+      clearInterval(this.interval);
+     }
+
    }
 
    }
