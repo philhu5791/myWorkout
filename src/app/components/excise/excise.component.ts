@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ExciseStep } from '../../classes/excise-step'
 import { StepSourceService } from '../../services/step-source.service';
+import { GlobalConfigService } from '../../services/global-config.service'
 
 @Component({
   selector: 'app-excise',
@@ -29,8 +30,11 @@ export class ExciseComponent implements OnInit {
     imageSrc: String;
     instruction: String[];
 
-    constructor(private service: StepSourceService) {
+    configService: GlobalConfigService;
+
+    constructor(private service: StepSourceService, private config: GlobalConfigService) {
       console.log("excise component is creating")
+      this.configService = config;
       this.color = 'primary';
       this.mode = 'determinate';
       console.log(this.excise);
@@ -43,8 +47,8 @@ export class ExciseComponent implements OnInit {
 //       console.log("value is "+ this.value)
 //       console.log("stepTime is "+ this.stepTime)
       console.log("excise component on Init")
-      this.loadStepDetail();
-      this.startCountingDown()
+//       this.loadStepDetail();
+//       this.startCountingDown()
     }
     ngOnChanges() {
     console.log("demoMode is changed " + this.demoMode)
@@ -102,6 +106,9 @@ export class ExciseComponent implements OnInit {
           }else{
             console.log("The excise is finished");
             this.finish = true;
+            if(this.configService.isAutoPlay){
+              setTimeout(()=>{this.onNextStep();}, 2000)
+            }
           }
         }
 

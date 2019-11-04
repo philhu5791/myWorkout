@@ -16,6 +16,7 @@ export class StepSourceService {
 
   constructor() {
      console.log("Data service starts");
+     this.isDemo = true;
      this.index = 0;
   }
 

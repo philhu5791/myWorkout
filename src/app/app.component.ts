@@ -41,8 +41,8 @@ export class AppComponent {
 //   }
 
   ngOnInit(){
-
     console.log("AppComponent init");
+    this.isDemoChecked = true;
   }
 
   onTest(){
