@@ -25,8 +25,8 @@ export class StepSourceService {
   }
 
   loadSteps(app: AppComponent){
-      Promise.resolve(STEPS).then(steps => {this.steps = steps; console.log("data is load"); this.size = steps.length; app.onTest(); });
-      Promise.resolve(DEMO_STEPS).then(steps => {this.demoSteps = steps; console.log("data is load"); this.size = steps.length; app.onTest();});
+      Promise.resolve(STEPS).then(steps => {this.steps = steps; console.log("data is load"); app.onTest(); });
+      Promise.resolve(DEMO_STEPS).then(steps => {this.demoSteps = steps; console.log("data is load"); app.onTest();});
     }
 
   getStep() : ExciseStep{
@@ -45,7 +45,7 @@ export class StepSourceService {
 
   nextStep(){
     this.index++;
-    this.index = this.index > this.size ? this.size: this.index;
+    this.index = this.index >= this.getStepSize() - 1? this.getStepSize() - 1: this.index;
   }
 
   previousStep(){
@@ -53,5 +53,12 @@ export class StepSourceService {
     this.index = this.index < 0? 0: this.index
   }
 
+  getStepSize(): number{
+     if(this.isDemo){
+          return this.demoSteps.length;
+        }else{
+          return this.steps.length;
+        }
+  }
 
 }

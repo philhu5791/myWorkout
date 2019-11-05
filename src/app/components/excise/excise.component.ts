@@ -78,12 +78,14 @@ export class ExciseComponent implements OnInit {
 
     onNextStep(){
        console.log("next button clicked!")
+       this.stopCountingDown();
        this.service.nextStep();
        this.loadStepDetail();
        this.startCountingDown()
     }
 
     onPreviousStep(){
+       this.stopCountingDown();
        this.service.previousStep();
        this.loadStepDetail();
        this.startCountingDown()

@@ -33,9 +33,9 @@
   <mat-card>
     <mat-card-content>
       <h2 *ngIf = "!finish">Repeat: {{repeat}}</h2>
-      <button mat-stroked-button color = "primary" *ngIf = "finish" (click)="onPreviousStep()">Previous</button>
+      <button mat-stroked-button color = "primary"  (click)="onPreviousStep()">Previous</button>
       <div class="divider"> </div>
-      <button mat-stroked-button color = "primary" *ngIf = "finish" (click)="onNextStep()">Next</button>
+      <button mat-stroked-button color = "primary" (click)="onNextStep()">Next</button>
     </mat-card-content>
   </mat-card>
 
